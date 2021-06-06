@@ -11,9 +11,12 @@ import scala.util.{Success, Try}
  *
  *   val level =
  *     """------
- *       |--ST--
- *       |--oo--
- *       |--oo--
+ *       |
+ *       |--Soooo--
+ *       |--ooooooooo--
+ *       |--oooooooooooo--
+ *       |--ooooooooooooo--
+ *       |--oooooTooooooooo--
  *       |------""".stripMargin
  *
  * - The `-` character denotes parts which are outside the terrain
@@ -69,7 +72,7 @@ trait StringParserTerrain extends GameDef {
    */
   def findChar(c: Char, levelVector: Vector[Vector[Char]]): Pos = {
     val row = levelVector.indexWhere(_.exists(_ == c))
-    val col = levelVector(col).indexOf(c)
+    val col = levelVector(row).indexOf(c)
     Pos(row, col)
   }
 

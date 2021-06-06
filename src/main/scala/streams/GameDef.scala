@@ -75,11 +75,15 @@ trait GameDef {
   case object Up    extends Move
   case object Down  extends Move
 
+  val allMoves = List(Left,Up,Right,Down)
+
   /**
    * This function returns the block at the start position of
    * the game.
    */
-  def startBlock: Block = ???
+  def startBlock: Block = Block(startPos, startPos)
+
+  def goalBlock: Block = Block(goal, goal)
 
 
   /**
@@ -103,6 +107,13 @@ trait GameDef {
      * changed by `d1` and `d2`, respectively.
      */
     def deltaCol(d1: Int, d2: Int) = Block(b1.deltaCol(d1), b2.deltaCol(d2))
+
+    def move(move : Move): Block = move match {
+      case Left => this.left
+      case Up => this.up
+      case Right => this.right
+      case Down => this.down
+    }
 
 
     /** The block obtained by moving left */
@@ -130,13 +141,15 @@ trait GameDef {
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
      */
-    def neighbors: List[(Block, Move)] = ???
+    def neighbors: List[(Block, Move)] = for {
+      m <- allMoves
+    } yield (this.move(m), m)
 
     /**
      * Returns the list of positions reachable from the current block
      * which are inside the terrain.
      */
-    def legalNeighbors: List[(Block, Move)] = ???
+    def legalNeighbors: List[(Block, Move)] = neighbors.filter{case(block, _)=> block.isLegal}
 
     /**
      * Returns `true` if the block is standing.
@@ -146,6 +159,6 @@ trait GameDef {
     /**
      * Returns `true` if the block is entirely inside the terrain.
      */
-    def isLegal: Boolean = ???
+    def isLegal: Boolean = terrain(b1) && terrain(b2)
   }
 }
