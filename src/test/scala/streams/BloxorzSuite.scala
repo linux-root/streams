@@ -1,9 +1,7 @@
 package streams
 
-import org.junit._
 import org.junit.Assert.assertEquals
-
-import Bloxorz._
+import org.junit._
 
 class BloxorzSuite {
   trait SolutionChecker extends GameDef with Solver with StringParserTerrain {
@@ -61,7 +59,7 @@ class BloxorzSuite {
 
   @Test def `optimal solution for level 1 (5pts)`: Unit =
     new Level1 {
-      assertEquals(Block(goal, goal), solve(solution))
+      assertEquals(goalBlock, solve(solution))
     }
 
 

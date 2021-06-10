@@ -141,7 +141,7 @@ trait GameDef {
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
      */
-    def neighbors: List[(Block, Move)] = for {
+    private def neighbors: List[(Block, Move)] = for {
       m <- allMoves
     } yield (this.move(m), m)
 
