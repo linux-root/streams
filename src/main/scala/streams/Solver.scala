@@ -27,11 +27,7 @@ trait Solver extends GameDef {
    * that are inside the terrain.
    */
   def neighborsWithHistory(b: Block, history: List[Move]): LazyList[(Block, List[Move])] = {
-    def fromZ(x: List[(Block, List[Move])]): LazyList[(Block, List[Move])] = x match {
-      case Nil => LazyList.empty[(Block, List[Move])]
-      case head :: tail => head #:: fromZ(tail)
-    }
-    fromZ(b.legalNeighbors.map { case (block, move) => (block, move :: history) })
+      b.legalNeighbors.map{case (block, move) => (block, move :: history)}.toSet.to(LazyList)
   }
 
 
