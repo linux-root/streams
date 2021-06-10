@@ -75,8 +75,6 @@ trait GameDef {
   case object Up    extends Move
   case object Down  extends Move
 
-  val allMoves = List(Left,Up,Right,Down)
-
   /**
    * This function returns the block at the start position of
    * the game.
@@ -141,9 +139,8 @@ trait GameDef {
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
      */
-    private def neighbors: List[(Block, Move)] = for {
-      m <- allMoves
-    } yield (this.move(m), m)
+    private def neighbors: List[(Block, Move)] =
+     List(Left, Up, Right, Down) map (m => (this.move(m), m))
 
     /**
      * Returns the list of positions reachable from the current block
