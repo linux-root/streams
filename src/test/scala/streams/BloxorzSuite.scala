@@ -36,6 +36,22 @@ class BloxorzSuite {
     val optsolution = List(Right, Right, Down, Right, Right, Right, Down)
   }
 
+  trait Level2 extends SolutionChecker {
+    /* terrain for level 1*/
+
+    val level =
+      """|oSoooo----
+         |----oo----
+         |----ooTo-""".stripMargin
+
+    val optsolution = Nil
+  }
+
+  @Test def `terrain function level 2 (10pts)`: Unit =
+    new Level2 {
+//      assertEquals(optsolution.length, solution.length)
+    }
+
 
   @Test def `terrain function level 1 (10pts)`: Unit =
     new Level1 {
